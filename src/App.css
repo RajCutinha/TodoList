@@ -1,38 +1,227 @@
 .App {
-  text-align: center;
+	display: grid;
+	grid-template-rows: 1fr 3fr;
+	min-height: 100vh;
+	background-color: var(--bg-secondary);
+	position: relative;
+	transition: background-color 0.5s ease-in-out;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-bg {
+	height: 100%;
+	overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app-bg img {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app-body {
+	position: absolute;
+	top: 8%;
+	left: 50%;
+	transform: translate(-50%);
+	width: 50%;
 }
 
-.App-link {
-  color: #61dafb;
+.app-body > div:first-child {
+	margin-bottom: 2em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-body h1 {
+	font-size: 3rem;
+	letter-spacing: 0.3em;
+	color: #fff;
+}
+
+.app-body img {
+	cursor: pointer;
+	object-fit: cover;
+}
+
+.app-body .todo-input {
+	position: relative;
+	margin-bottom: 2em;
+	border-radius: 0.6em;
+	box-shadow: 0 3px 20px 10px rgba(0, 0, 0, 0.45);
+}
+
+.app-body .todo-input input[type="text"] {
+	padding: 1em 4em 1em 3em;
+	width: 100%;
+	border-radius: 0.5em;
+	border: none;
+	font-size: 1.1rem;
+	font-weight: 500;
+	background-color: var(--bg-primary);
+	color: var(--font-primary);
+	transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.app-body .todo-input input[type="text"]::placeholder {
+	font-weight: 700;
+	font-size: 1rem;
+	color: var(--font-primary);
+	transition: color 0.5s ease-in-out;
+}
+
+.app-body .todo-input input[type="checkbox"] {
+	position: absolute;
+	left: 1em;
+	top: 50%;
+	transform: translateY(-50%);
+	appearance: none;
+	-webkit-appearance: none;
+	border: 1px solid var(--font-primary);
+	padding: 0.5em;
+	border-radius: 50%;
+	font-size: 1.1rem;
+}
+
+.app-body .todo-input input[type="checkbox"]:checked {
+	background: linear-gradient(135deg, var(--primary-check-background))
+		center/cover no-repeat;
+}
+
+.app-body .todo-input input[type="checkbox"]:checked:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-image: url("./icon-check.svg");
+	width: 50%;
+	height: 50%;
+}
+
+.app-body .todo-input img {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+	object-fit: cover;
+	padding: 1em;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.app-body .todo-input img:hover {
+	background-color: limegreen;
+}
+
+.todo-list {
+	box-shadow: 0 3px 20px 5px rgba(0, 0, 0, 0.1);
+}
+
+.todo-list ul li {
+	width: 100%;
+	list-style: none;
+	background-color: var(--bg-primary);
+	padding: 1em;
+	font-size: 1.1rem;
+	font-weight: 500;
+	color: var(--font-primary);
+	border-bottom: 1px solid var(--font-secondary);
+	transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.todo-list ul li.completed {
+	background-color: var(--bg-secondary);
+	text-decoration: line-through;
+}
+
+.todo-list ul li:first-of-type {
+	border-radius: 0.5em 0.5em 0 0;
+}
+
+.todo-list ul li input {
+	margin-right: 2em;
+	cursor: pointer;
+}
+
+.todo-list ul li img {
+	margin-left: auto;
+}
+
+.todo-list ul li p {
+	cursor: pointer;
+}
+
+.todo-list input[type="checkbox"] {
+	appearance: none;
+	-webkit-appearance: none;
+	border: 1px solid var(--font-primary);
+	padding: 0.8em;
+	border-radius: 50%;
+	position: relative;
+}
+
+.todo-list input[type="checkbox"]:checked {
+	background: linear-gradient(135deg, var(--primary-check-background))
+		center/cover no-repeat;
+}
+
+.todo-list input[type="checkbox"]:checked:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: url("./icon-check.svg") no-repeat center/cover;
+	width: 50%;
+	height: 50%;
+	pointer-events: none;
+}
+
+.empty {
+	background-color: var(--bg-primary);
+	border-radius: 0.5em 0.5em 0 0;
+	text-align: center;
+	padding: 1em 0;
+	transition: background-color 0.5s ease-in-out;
+}
+
+.empty h2 {
+	color: var(--font-primary);
+	font-size: 2rem;
+	font-weight: 700;
+	transition: color 0.5s ease-in-out;
+}
+
+.filter {
+	padding: 1em;
+	background-color: var(--bg-primary);
+	border-radius: 0 0 0.5em 0.5em;
+	font-size: 1rem;
+	transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.filter p {
+	color: var(--font-secondary);
+}
+
+.filter div button {
+	font-weight: 700;
+	margin-right: 1em;
+	color: var(--font-secondary);
+	background-color: transparent;
+	border: none;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.filter div button.active {
+	color: var(--primary-bright-blue);
+}
+
+.filter > button {
+	font-weight: 500;
+	color: var(--font-secondary);
+	background-color: transparent;
+	border: none;
+	font-size: 1rem;
+	cursor: pointer;
 }
