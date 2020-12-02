@@ -31,9 +31,21 @@ function App() {
 		}
 	}
 
-	function addItem() {
-		setTodos([...todos, { value: formInput, completed: false }]);
-		setFormInput("");
+	function addItem(e) {
+		const parent = e.target.parentElement;
+		if (formInput === "") {
+			parent.querySelector("input[type='text']").classList.add("error");
+			parent
+				.querySelector("input[type='text']")
+				.setAttribute("placeholder", "Add atleast 1 word...");
+		} else {
+			setTodos([...todos, { value: formInput, completed: false }]);
+			parent.querySelector("input[type='text']").classList.remove("error");
+			parent
+				.querySelector("input[type='text']")
+				.setAttribute("placeholder", "Create a new todo...");
+			setFormInput("");
+		}
 	}
 
 	function controlComplete(e) {

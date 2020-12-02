@@ -68,6 +68,10 @@
 	transition: color 0.5s ease-in-out;
 }
 
+.app-body .todo-input input[type="text"].error {
+	border: 1px solid red;
+}
+
 .app-body .todo-input input[type="checkbox"] {
 	position: absolute;
 	left: 1em;
