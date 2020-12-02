@@ -1,5 +1,6 @@
 const TodoList = ({
 	todos,
+	setTodos,
 	controlComplete,
 	clear,
 	deleteTodo,
@@ -10,12 +11,57 @@ const TodoList = ({
 		0
 	);
 
+	let startIndex;
+
+	function dragStart(e) {
+		startIndex = +e.target.closest("li").getAttribute("data-index");
+	}
+
+	function dragEnter(e) {
+		e.target.classList.add("over");
+	}
+
+	function dragLeave(e) {
+		e.target.classList.remove("over");
+	}
+
+	function dragOver(e) {
+		e.preventDefault();
+	}
+
+	function dragDrop(e) {
+		const endIndex = +e.target.getAttribute("data-index");
+		swapItems(startIndex, endIndex);
+		e.target.classList.remove("over");
+	}
+
+	function swapItems(from, to) {
+		const itemOne = todos[from];
+		const itemTwo = todos[to];
+
+		const newTodos = [...todos];
+		newTodos[to] = itemOne;
+		newTodos[from] = itemTwo;
+
+		setTodos(newTodos);
+	}
+
 	return (
 		<div className="todo-list">
 			<ul>
 				{todos.map((todo, index) => {
 					return todo.completed === false ? (
-						<li className="flex align-center" key={index}>
+						<li
+							className="flex align-center"
+							draggable={true}
+							key={index}
+							data-index={index}
+							onDragStart={dragStart}
+							onDragEnter={dragEnter}
+							onDragLeave={dragLeave}
+							onDragOver={dragOver}
+							onDrop={dragDrop}
+						>
 							<input
 								type="checkbox"
 								onChange={controlComplete}
@@ -29,7 +75,17 @@ const TodoList = ({
 							/>
 						</li>
 					) : (
-						<li className="flex align-center completed" key={index}>
+						<li
+							className="flex align-center completed"
+							draggable={true}
+							key={index}
+							data-index={index}
+							onDragStart={dragStart}
+							onDragEnter={dragEnter}
+							onDragLeave={dragLeave}
+							onDragOver={dragOver}
+							onDrop={dragDrop}
+						>
 							<input
 								type="checkbox"
 								onChange={controlComplete}

@@ -125,12 +125,14 @@ function App() {
 				/>
 				<TodoList
 					todos={filteredTodos}
+					setTodos={setTodos}
 					setFilter={setFilter}
 					controlComplete={controlComplete}
 					clear={clear}
 					deleteTodo={deleteTodo}
 					filterControl={filterControl}
 				/>
+				<p>Drag and drop to reorder list</p>
 			</div>
 		</div>
 	);

@@ -24,7 +24,7 @@
 	top: 8%;
 	left: 50%;
 	transform: translate(-50%);
-	width: 50%;
+	width: 60%;
 }
 
 .app-body > div:first-child {
@@ -112,6 +112,13 @@
 	background-color: limegreen;
 }
 
+.app-body > p {
+	color: var(--font-secondary);
+	font-size: 1rem;
+	text-align: center;
+	margin-bottom: 3em;
+}
+
 .todo-list {
 	box-shadow: 0 3px 20px 5px rgba(0, 0, 0, 0.1);
 }
@@ -126,6 +133,10 @@
 	color: var(--font-primary);
 	border-bottom: 1px solid var(--font-secondary);
 	transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.todo-list ul li.over {
+	opacity: 0.6;
 }
 
 .todo-list ul li.completed {
@@ -197,6 +208,7 @@
 	border-radius: 0 0 0.5em 0.5em;
 	font-size: 1rem;
 	transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+	margin-bottom: 3em;
 }
 
 .filter p {
@@ -213,6 +225,10 @@
 	cursor: pointer;
 }
 
+.filter div button:last-child {
+	margin-right: unset;
+}
+
 .filter div button.active {
 	color: var(--primary-bright-blue);
 }
@@ -224,4 +240,41 @@
 	border: none;
 	font-size: 1rem;
 	cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+	.app-body {
+		width: 80%;
+	}
+}
+
+@media (max-width: 650px) {
+	.todo-list {
+		position: relative;
+	}
+
+	.empty {
+		padding: 1em;
+	}
+
+	.empty h2 {
+		font-size: 1.5rem;
+	}
+
+	.filter div.flex {
+		position: absolute;
+		width: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: -5rem;
+		background-color: var(--bg-primary);
+		padding: 1em 0;
+		justify-content: center;
+		border-radius: 0.5em;
+		transition: background-color 0.5s ease-in-out;
+	}
+
+	.filter {
+		margin-bottom: 8em;
+	}
 }
